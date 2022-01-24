@@ -8,17 +8,17 @@ const uuid = require("../helpers/uuid");
 router.get("/notes", (req, res) => {
     res.json(db);
   });
-  
-  // add a note
-  router.post("/notes", (req, res) => {
+
+// add a note
+router.post("/notes", (req, res) => {
     req.body.id = uuid();
     db.push(req.body);
     fs.writeFileSync("./db/db.json", JSON.stringify(db, null, "\t"));
     res.json(db);
   });
   
-  // delete a note
-  router.delete(`/notes/:id`, (req, res) => {
+// delete a note
+router.delete(`/notes/:id`, (req, res) => {
     const id = req.params.id;
     for (let i = 0; i < db.length; i++) {
       if (db[i].id === id) {
